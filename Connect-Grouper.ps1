@@ -11,7 +11,7 @@
 
     .NOTES
 #>
-function Connect-GrouperApi
+function Connect-Grouper
 {
     param (
         [Parameter(Mandatory=$true)]
