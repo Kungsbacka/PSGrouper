@@ -84,7 +84,7 @@ NestedModules = @(
 FunctionsToExport = @(
     'Add-GrouperDocumentTag'
     'Compare-GrouperDocumentAgainstStore'
-    'Connect-GrouperApi'
+    'Connect-Grouper'
     'ConvertFrom-GrouperDocument'
     'ConvertTo-GrouperDocument'
     'Edit-GrouperDocument'
