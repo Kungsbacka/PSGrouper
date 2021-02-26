@@ -27,4 +27,4 @@ function Connect-Grouper
     $Script:ApiUrl = $url
 }
 
-Export-ModuleMember -Function 'Connect-GrouperApi'
+Export-ModuleMember -Function 'Connect-Grouper'
