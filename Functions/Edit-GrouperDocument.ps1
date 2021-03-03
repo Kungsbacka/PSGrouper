@@ -58,7 +58,7 @@ function Edit-GrouperDocument
                 <ComboBoxItem Content="OnPremAD - Filter" />
                 <ComboBoxItem Content="OnPremAD - Group" />
                 <ComboBoxItem Content="AzureAD" />
-                <ComboBoxItem Content="EXO" />
+                <ComboBoxItem Content="Exo - Group" />
                 <ComboBoxItem Content="MetaDirectory" />
             </ComboBox>
             <Button x:Name="InsertRule" Content="Insert rule" Margin="5,5,5,5" Padding="3,0,3,0" />
