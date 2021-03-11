@@ -48,7 +48,7 @@ function Test-GrouperDocument
     end {
         $errors = ApiPostDocument (GetApiUrl 'document' 'validate') $sb.ToString()
         if ($OutputErrors) {
-            $errors.errorText
+            $errors.errorMessage
         }
         else
         {
