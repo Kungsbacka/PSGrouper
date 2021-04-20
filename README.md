@@ -132,3 +132,4 @@ Grouper can work with groups in the following locations:
 * On-premise Active Directory
 * Azure AD
 * Exchange Online (distribution groups)
+* OpenE
