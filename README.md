@@ -2,7 +2,7 @@
 
 ## Description
 
-Grouper manages group membership for on-premise AD groups, Azure AD groups and Exchange Online (EXO) distribution groups.
+Grouper manages group membership for on-premise AD groups, Azure AD groups, Exchange Online (EXO) distribution groups and OpenE Platform.
 
 This is the PowerShell modules that is used for creating and updating Grouper documents. It can also be used to read logs.
 The core functionality of Grouper is found [here](https://github.com/Kungsbacka/Grouper)
@@ -132,4 +132,4 @@ Grouper can work with groups in the following locations:
 * On-premise Active Directory
 * Azure AD
 * Exchange Online (distribution groups)
-* OpenE
+* OpenE Platform
