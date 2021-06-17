@@ -89,6 +89,9 @@ function Get-GrouperEventLog
             }
             $query.DocumentId = $docId
         }
+        if ($GroupId) {
+            $query.GroupId = $GroupId
+        }
         if ($LogLevel) {
             $query.LogLevel = $LogLevel
         }
