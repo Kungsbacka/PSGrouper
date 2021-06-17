@@ -2,7 +2,7 @@
 
 ## Description
 
-Grouper manages group membership for on-premise AD groups, Azure AD groups and Exchange Online (EXO) distribution groups.
+Grouper manages group membership for on-premise AD groups, Azure AD groups, Exchange Online (EXO) distribution groups and OpenE Platform.
 
 This is the PowerShell modules that is used for creating and updating Grouper documents. It can also be used to read logs.
 The core functionality of Grouper is found [here](https://github.com/Kungsbacka/Grouper)
@@ -15,16 +15,16 @@ successfully built for both .NET Framework 4.7.2 and .NET Core 3.0.
 PSGrouper uses the [Grouper API](https://github.com/Kungsbacka/Grouper/tree/master/GrouperApi) to perform most tasks and this
 must be up an running before PSGrouper can be used.
 
-The DLLs that is part of this Git repository is built for use with PowerShell 5 (.Net Framework 4.7.2).
+The DLLs that is part of this Git repository is built for use with PowerShell 5.x (.NET Framework 4.7.2).
 
 ## Deploying
 
 * Copy the PowerShell module to a folder that is included in the PSModulePath (if you want the module to autoload)
-* If you want support for a later PowerShell version than 5.1 you have to build GrouperLib (CompileTargetCore) and copy GrouperLib.Core.dll, Newtonsoft.Json.dll and GrouperLib.Language.dll to the module folder (if you want support for Swedish, also copy sv\GrouperLib.Language.resources.dll to \<module folder\>\sv)
+* If you want support for later PowerShell versions ("PowerShell Core") you have to build GrouperLib (CompileTargetCore) and copy GrouperLib.Core.dll, Newtonsoft.Json.dll and GrouperLib.Language.dll to the module folder (if you want support for Swedish, copy sv\GrouperLib.Language.resources.dll to \<module folder\>\sv)
 
 ## Working with Grouper documents
 
-Below are some examples of how to perform common tasks. Take a look at the cmdlet help for more information.
+Below are some examples of how to perform common tasks. Take a look at the help for each function for more information.
 
 Before you can use the PowerShell module you have to connect to the API using Connect-GrouperApi.
 
@@ -53,11 +53,11 @@ Get-Content document.json | ConvertTo-GrouperDocument | Save-GrouperDocument
 # ...or straight from the clipboard
 Get-Clipboard | ConvertTo-GrouperDocument | Save-GrouperDocument
 
-# To check if a "hand made" document is valid before converting, use Test-GrouperDocument
+# To check if a document is valid before converting, use Test-GrouperDocument
 Get-Content document.json | Test-GrouperDocument -OutputErrors
 ```
 
-## Group document
+## Grouper document
 
 A Grouper document contains all information required by Grouper to process a single group.
 Name, ID and Store are required properties. The document must also contain at least one
@@ -132,4 +132,4 @@ Grouper can work with groups in the following locations:
 * On-premise Active Directory
 * Azure AD
 * Exchange Online (distribution groups)
-* OpenE
+* OpenE Platform
