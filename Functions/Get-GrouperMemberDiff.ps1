@@ -42,7 +42,7 @@ function Get-GrouperMemberDiff
         if ($null -eq $document) {
             return
         }
-        $url = GetApiUrl 'document' 'diff'
+        $url = GetApiUrl 'grouper' 'diff'
         if ($IncludeUnchanged) {
             $url = AddUrlParameter $url 'unchanged' 'true'
         }
