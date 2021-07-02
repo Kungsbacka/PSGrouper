@@ -98,6 +98,7 @@ FunctionsToExport = @(
     'Publish-GrouperDocument'
     'Remove-GrouperDocument'
     'Remove-GrouperDocumentTag'
+    'Rename-GrouperDocumentGroup'
     'Restore-GrouperDocument'
     'Save-GrouperDocument'
     'Test-GrouperDocument'
