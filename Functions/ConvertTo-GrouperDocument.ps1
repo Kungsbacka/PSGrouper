@@ -26,7 +26,7 @@ function ConvertTo-GrouperDocument
         $InputObject
     )
     begin {
-        $sb = [System.Text.StringBuilder]::new()
+        $sb = New-Object -TypeName 'System.Text.StringBuilder'
     }
 
     process {
@@ -42,5 +42,3 @@ function ConvertTo-GrouperDocument
         Write-Output -InputObject $document
     }
 }
-
-Export-ModuleMember -Function 'ConvertTo-GrouperDocument'

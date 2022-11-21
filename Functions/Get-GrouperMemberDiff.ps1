@@ -48,23 +48,21 @@ function Get-GrouperMemberDiff
         }
         $diff = ApiPostDocument $url $document
         foreach ($item in $diff.Add) {
-            $member = [GrouperLib.Core.GroupMember]::new($item.id, $item.displayName, $item.memberType)
-            $obj = [GrouperLib.Core.GroupMemberOperation]::new($document, $member, 'Add')
+            $member = New-Object -TypeName 'GrouperLib.Core.GroupMember' -ArgumentList @($item.id, $item.displayName, $item.memberType)
+            $obj = New-Object -TypeName 'GrouperLib.Core.GroupMemberTask' -ArgumentList @($document, $member, 'Add')
             Write-Output -InputObject $obj
         }
         foreach ($item in $diff.Remove) {
-            $member = [GrouperLib.Core.GroupMember]::new($item.id, $item.displayName, $item.memberType)
-            $obj = [GrouperLib.Core.GroupMemberOperation]::new($document, $member, 'Remove')
+            $member = New-Object -TypeName 'GrouperLib.Core.GroupMember' -ArgumentList @($item.id, $item.displayName, $item.memberType)
+            $obj = New-Object -TypeName 'GrouperLib.Core.GroupMemberTask' -ArgumentList @($document, $member, 'Remove')
             Write-Output -InputObject $obj
         }
         if ($IncludeUnchanged) {
             foreach ($item in $diff.Unchanged) {
-                $member = [GrouperLib.Core.GroupMember]::new($item.id, $item.displayName, $item.memberType)
-                $obj = [GrouperLib.Core.GroupMemberOperation]::new($document, $member, 'None')
+                $member = New-Object -TypeName 'GrouperLib.Core.GroupMember' -ArgumentList @($item.id, $item.displayName, $item.memberType)
+                $obj = New-Object -TypeName 'GrouperLib.Core.GroupMemberTask' -ArgumentList @($document, $member, 'None')
                 Write-Output -InputObject $obj
             }
         }
     }
 }
-
-Export-ModuleMember -Function 'Get-GrouperMemberDiff'

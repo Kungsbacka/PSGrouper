@@ -56,5 +56,3 @@ function Save-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Save-GrouperDocument'

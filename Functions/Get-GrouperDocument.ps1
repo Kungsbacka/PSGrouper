@@ -67,7 +67,7 @@ function Get-GrouperDocument
         [Parameter(Mandatory=$true,ParameterSetName='GroupName', Position=0)]
         [string]$GroupName,
         [Parameter(Mandatory=$true,ParameterSetName='MemberSource')]
-        [GrouperLib.Core.GroupMemberSources]$MemberSource,
+        [GrouperLib.Core.GroupMemberSource]$MemberSource,
         [Parameter(Mandatory=$true,ParameterSetName='RuleNameAndValue')]
         [string]$RuleName,
         [Parameter(Mandatory=$false,ParameterSetName='RuleNameAndValue')]
@@ -80,7 +80,7 @@ function Get-GrouperDocument
         [Parameter(Mandatory=$false,ParameterSetName='GroupName')]
         [Parameter(Mandatory=$false,ParameterSetName='MemberSource')]
         [Parameter(Mandatory=$false,ParameterSetName='RuleNameAndValue')]
-        [GrouperLib.Core.GroupStores]$Store,
+        [GrouperLib.Core.GroupStore]$Store,
         [Parameter(Mandatory=$false,ParameterSetName='FetchAll')]
         [Parameter(Mandatory=$false,ParameterSetName='DocumentId')]
         [Parameter(Mandatory=$false,ParameterSetName='GroupId')]
@@ -162,5 +162,3 @@ function Get-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Get-GrouperDocument'

@@ -40,5 +40,3 @@ function Restore-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Restore-GrouperDocument'

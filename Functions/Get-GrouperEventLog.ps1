@@ -61,7 +61,7 @@ function Get-GrouperEventLog
         $MessageContains,
         [Parameter(Mandatory=$false,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,ParameterSetName='Range')]
-        [GrouperLib.Core.LogLevels]
+        [GrouperLib.Core.LogLevel]
         $LogLevel,
         [Parameter(Mandatory=$false,ParameterSetName='Newest')]
         [int]
@@ -126,5 +126,3 @@ function Get-GrouperEventLog
         }
     }
 }
-
-Export-ModuleMember -Function 'Get-GrouperEventLog'

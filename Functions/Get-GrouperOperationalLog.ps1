@@ -124,5 +124,3 @@ function Get-GrouperOperationalLog
         }
     }
 }
-
-Export-ModuleMember -Function 'Get-GrouperOperationalLog'

@@ -48,5 +48,3 @@ function Rename-GrouperDocumentGroup
         $document.CloneWithNewGroupName($NewName)
     }
 }
-
-Export-ModuleMember -Function 'Rename-GrouperDocumentGroup'

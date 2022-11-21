@@ -105,5 +105,3 @@ function Get-GrouperAuditLog
         }
     }
 }
-
-Export-ModuleMember -Function 'Get-GrouperAuditLog'

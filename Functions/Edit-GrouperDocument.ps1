@@ -275,7 +275,7 @@ function Edit-GrouperDocument
             param($sendr, $e)
             if ($e.Key -eq 'Tab') {
                 $numSpace = 2 - (($sendr.CaretPosition.GetLineStartPosition(0).GetOffsetToPosition($sendr.Selection.Start) - 1) % 2)
-                $sendr.Selection.Text = [string]::new(' ', $numSpace)
+                $sendr.Selection.Text = New-Object -TypeName 'string' -ArgumentList @(' ', $numSpace)
                 $sendr.Selection.Select($sendr.Selection.End, $sendr.Selection.End)
                 $e.Handled = $true
             }
@@ -335,5 +335,3 @@ function Edit-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Edit-GrouperDocument'

@@ -40,5 +40,3 @@ function Publish-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Publish-GrouperDocument'

@@ -43,5 +43,3 @@ function Remove-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Remove-GrouperDocument'

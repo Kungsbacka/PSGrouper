@@ -36,7 +36,7 @@ function Test-GrouperDocument
         if (-not (CheckApi)) {
             break
         }
-        $sb = [System.Text.StringBuilder]::new()
+        $sb = New-Object -TypeName 'System.Text.StringBuilder'
     }
 
     process {
@@ -56,5 +56,3 @@ function Test-GrouperDocument
         }
     }
 }
-
-Export-ModuleMember -Function 'Test-GrouperDocument'

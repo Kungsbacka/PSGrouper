@@ -62,5 +62,3 @@ function Add-GrouperDocumentTag
         }
     }
 }
-
-Export-ModuleMember -Function 'Add-GrouperDocumentTag'

@@ -83,5 +83,3 @@ function Invoke-Grouper
         }
     }
 }
-
-Export-ModuleMember -Function 'Invoke-Grouper'

@@ -80,5 +80,3 @@ function Compare-GrouperDocumentAgainstStore
         }
     }
 }
-
-Export-ModuleMember -Function 'Compare-GrouperDocumentAgainstStore'

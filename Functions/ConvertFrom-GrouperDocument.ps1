@@ -44,5 +44,3 @@ function ConvertFrom-GrouperDocument
         $document.ToJson($formatting)
     }
 }
-
-Export-ModuleMember -Function 'ConvertFrom-GrouperDocument'

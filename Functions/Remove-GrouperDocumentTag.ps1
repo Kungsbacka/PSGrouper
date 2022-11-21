@@ -51,5 +51,3 @@ function Remove-GrouperDocumentTag
         }
     }
 }
-
-Export-ModuleMember -Function 'Remove-GrouperDocumentTag'
