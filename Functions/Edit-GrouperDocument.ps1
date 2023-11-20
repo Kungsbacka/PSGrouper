@@ -307,29 +307,35 @@ function Edit-GrouperDocument
             return $true
         }
         $Script:cancelRequested = $false
+        $documentList = New-Object -TypeName 'System.Collections.ArrayList'
     }
 
     process {
-        if ($Script:cancelRequested) {
-            break
-        }
         $document = GetDocumentFromInputObject $InputObject
         if ($null -eq $document) {
             return
         }
-        $Script:skipClicked = $false
-        $Script:nextClicked = $false
-        SetContent $document
-        $async = $window.Dispatcher.InvokeAsync({
-          $null = $window.ShowDialog()
-        })
-        $null = $async.Wait()
-        if ($Script:nextClicked) {
-            ConvertTo-GrouperDocument -InputObject (GetContent)
-        }
+        $null = $documentList.Add($document)
     }
 
     end {
+        $n = 1
+        foreach ($document in $documentList) {
+            $window.Title = 'Document Editor (' + ($n++) + '/' + $documentList.Count + ')'
+            $Script:skipClicked = $false
+            $Script:nextClicked = $false
+            SetContent $document
+            $async = $window.Dispatcher.InvokeAsync({
+                $null = $window.ShowDialog()
+            })
+            $null = $async.Wait()
+            if ($Script:nextClicked) {
+                ConvertTo-GrouperDocument -InputObject (GetContent)
+            }
+            if ($Script:cancelRequested) {
+                break
+            }
+        }
         if ($window -and -not $window.Closed) {
             $window.Close()
         }
