@@ -236,7 +236,13 @@ function Edit-GrouperDocument
                 return
             }
             $doc = ConvertTo-GrouperDocument -InputObject $json
-            Get-GrouperMemberDiff -InputObject $doc | Out-Host
+            $diff = Get-GrouperMemberDiff -InputObject $doc
+            if ($null -eq $diff) {
+                Write-Host '(There are no changes)' -ForegroundColor Green
+            }
+            else {
+                $diff | Out-Host
+            }
         })
         $control = $window.FindName('Skip')
         $control.Add_Click({
