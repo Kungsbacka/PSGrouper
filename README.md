@@ -2,7 +2,7 @@
 
 ## Description
 
-Grouper manages group membership for on-premise AD groups, Azure AD groups, Exchange Online (EXO) distribution groups and OpenE Platform.
+Grouper manages group membership for on-premise AD groups, Entra ID groups, Exchange Online (EXO) distribution groups and OpenE Platform.
 
 This is the PowerShell modules that is used for creating and updating Grouper documents. It can also be used to read logs.
 The core functionality of Grouper is found [here](https://github.com/Kungsbacka/Grouper)
@@ -72,7 +72,7 @@ is updated in the document database.
 A full pass is done three times a day (at 6 am, 12 pm and 4 pm). This is hardcoded into the
 service (see method ShouldProcessAllDocuments), but may be configurable at a later time.
 
-Below is an example where the group lives in Azure AD and the members come from a student
+Below is an example where the group lives in Entra ID and the members come from a student
 roster (elevregister).
 
 ```Json
@@ -116,20 +116,20 @@ can be used to filter members.
 class, group or year can be used.
 * __Static__: Explicitly add members to a group by listing the UPN for each member.
 * __CustomView__: Get members from a custom database view.
-* __AzureAdGroup__: Get members from an Azure AD group.
+* __AzureAdGroup__: Get members from an Entra ID group.
 * __ExoGroup__: Get members from an Exchange Online distribution group.
 * __OnPremAdGroup__: Get members from an on-premise Active Directory group.
 * __OnPremAdQuery__: Get members from an on-premise Active Directory LDAP query (with optional search base)
 
 The first four sources requires access to a member database (e.g. a metadirectory) that can output
 relevant user identities, but the last four only requires access to their respective catalog
-(Azure AD, On-premise AD or Exchange Online).
+(Entra ID, On-premise AD or Exchange Online).
 
 ## Group stores
 
 Grouper can work with groups in the following locations:
 
 * On-premise Active Directory
-* Azure AD
+* Entra ID
 * Exchange Online (distribution groups)
 * OpenE Platform
