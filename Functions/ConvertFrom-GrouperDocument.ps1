@@ -36,11 +36,11 @@ function ConvertFrom-GrouperDocument
             return
         }
         if ($Compact) {
-            $formatting = 'None'
+            $indented = $false
         }
         else {
-            $formatting = 'Indent'
+            $indented = $true
         }
-        $document.ToJson($formatting)
+        $document.ToJson($indented)
     }
 }

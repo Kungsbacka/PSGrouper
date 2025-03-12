@@ -44,13 +44,13 @@ function Save-GrouperDocument
         }
         if ($Publish) {
             if ($PSCmdlet.ShouldProcess($document.Id, 'Save & Publish')) {
-                ApiInvokeWebRequest (GetApiUrl 'document') 'Post' $document
-                ApiInvokeWebRequest (GetApiUrl 'document' "publish/$($document.Id)") 'Post'
+                ApiPostDocument (GetApiUrl 'document') $document
+                InvokeWebRequest (GetApiUrl 'document' "publish/$($document.Id)") 'Post'
             }
         }
         else {
             if ($PSCmdlet.ShouldProcess($document.Id, 'Save')) {
-                ApiInvokeWebRequest (GetApiUrl 'document') 'Post' $document
+                ApiPostDocument (GetApiUrl 'document') $document
                 Write-Warning -Message 'Document is not published and may not be processed by the scheduled task. Use Publish-GrouperDocument to publish.'
             }
         }

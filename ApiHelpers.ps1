@@ -48,7 +48,7 @@ function ApiInvokeWebRequest($url, $method, $body)
     }
     if ($body) {
         if ($body -is [GrouperLib.Core.GrouperDocument]) {
-            $params.Body = $body.ToJson('None')
+            $params.Body = $body.ToJson()
         }
         else {
             $params.Body = $body
@@ -81,7 +81,7 @@ function ApiGetDocuments($fragment, $params, $includeMeta)
             }
         }
         else {
-            $grouperDocument   
+            $grouperDocument
         }
     }
 }
@@ -89,7 +89,7 @@ function ApiGetDocuments($fragment, $params, $includeMeta)
 function ApiPostDocument($url, $doc)
 {
     if ($doc -is [GrouperLib.Core.GrouperDocument]) {
-        $json = $doc.ToJson('None')
+        $json = $doc.ToJson()
     }
     else {
         $json = $doc
@@ -102,6 +102,7 @@ function ApiPostDocument($url, $doc)
         UseDefaultCredentials = $true
         UseBasicParsing = $true
     }
+
     Invoke-RestMethod @params
 }
 

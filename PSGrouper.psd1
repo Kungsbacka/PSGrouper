@@ -60,9 +60,9 @@ RequiredModules = @()
 # because they require redirection to load the correct dependencies.
 RequiredAssemblies = @(
     'PresentationFramework'
-    'Newtonsoft.Json.dll'
     'GrouperLib.Language.dll'
     'GrouperLib.Core.dll'
+    'sv/GrouperLib.Language.resources.dll'
 )
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.

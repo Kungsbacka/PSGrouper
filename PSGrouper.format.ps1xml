@@ -141,7 +141,7 @@
                                 <PropertyName>Action</PropertyName>
                             </TableColumnItem>
                             <TableColumnItem>
-                                <ScriptBlock>DocumentId</ScriptBlock>
+                                <ScriptBlock>$_.DocumentId.ToString().Substring(24, 12)</ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>
                     </TableRowEntry>

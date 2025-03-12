@@ -299,7 +299,7 @@ function Edit-GrouperDocument
         function SetContent($doc) {
             $control = $window.FindName('JsonContent')
             $range = New-Object -TypeName 'System.Windows.Documents.TextRange' -ArgumentList @($control.Document.ContentStart, $control.Document.ContentEnd)
-            $range.Text = $doc.ToJson()
+            $range.Text = $doc.ToJson($true)
         }
 
         function Validate($json) {
