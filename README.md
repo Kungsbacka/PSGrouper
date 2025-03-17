@@ -31,7 +31,7 @@ Before you can use the PowerShell module you have to connect to the API using Co
 
 ```PowerShell
 # Connect to the API
-Connect-GrouperApi -Uri 'https://api-server/path/to/api'
+Connect-Grouper -Uri 'https://api-server/path/to/api'
 
 # Process a single document
 Get-GrouperDocument -GroupName 'My Group' | Invoke-Grouper
