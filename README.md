@@ -19,9 +19,9 @@ must be up and running before PSGrouper can be used.
 
 Run Build.ps1 to make either a release build or a debug build. A release build builds necessary components of GrouperLib, creates a file catalog,
 signs the catalog and relevant module files with a code signing certificate (must be in the current user's certificate store), and finally
-creates a zip file with all files that need to be distributed to the clients.
+creates a zip file with all files that need to be distributed to the client.
 
-A debug build only builds GrouperLib and puts it in a lib folder for debugging purposes.
+A debug build only builds GrouperLib and puts the resulting binaries in a lib folder for debugging purposes.
 
 ## Working with Grouper documents
 
