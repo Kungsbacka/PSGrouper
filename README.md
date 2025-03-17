@@ -34,13 +34,13 @@ Before you can use the PowerShell module you have to connect to the API using Co
 Connect-GrouperApi -Uri 'https://api-server/path/to/api'
 
 # Process a single document
-Get-GrouperDocumentEntry -GroupName 'My Group' | Invoke-Grouper
+Get-GrouperDocument -GroupName 'My Group' | Invoke-Grouper
 
 # Process all published documents in the database
-Get-GrouperDocumentEntry -All | Invoke-Grouper
+Get-GrouperDocument -All | Invoke-Grouper
 
 # Edit a document, save and publish in one go
-Get-GrouperDocumentEntry -GroupName 'My Group' | Edit-GrouperDocument | Save-GrouperDocument -Publish
+Get-GrouperDocument -GroupName 'My Group' | Edit-GrouperDocument | Save-GrouperDocument -Publish
 
 # Create a new document, edit and save (without publishing)
 # A new document always contains one member object (static) as a placeholder just to make the document valid.
