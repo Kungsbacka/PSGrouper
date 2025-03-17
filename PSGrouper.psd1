@@ -12,7 +12,7 @@
 RootModule = 'PSGrouper.psm1'
 
 # Version number of this module.
-ModuleVersion = '5.0.0'
+ModuleVersion = '5.0.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -60,9 +60,9 @@ RequiredModules = @()
 # because they require redirection to load the correct dependencies.
 RequiredAssemblies = @(
     'PresentationFramework'
-    'GrouperLib.Language.dll'
-    'GrouperLib.Core.dll'
-    'sv/GrouperLib.Language.resources.dll'
+    'lib/GrouperLib.Language.dll'
+    'lib/GrouperLib.Core.dll'
+    'lib/sv/GrouperLib.Language.resources.dll'
 )
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.

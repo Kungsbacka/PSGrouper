@@ -1,3 +1,4 @@
 .vscode
 depend.cmd
 release/
+lib/
