@@ -45,7 +45,7 @@ function Save-GrouperDocument
         if ($Publish) {
             if ($PSCmdlet.ShouldProcess($document.Id, 'Save & Publish')) {
                 ApiPostDocument (GetApiUrl 'document') $document
-                InvokeWebRequest (GetApiUrl 'document' "publish/$($document.Id)") 'Post'
+                ApiInvokeWebRequest (GetApiUrl 'document' "publish/$($document.Id)") 'Post'
             }
         }
         else {
