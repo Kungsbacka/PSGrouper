@@ -102,6 +102,7 @@ function Get-GrouperOperationalLog
             $query.Count = $Newest
         }
         else {
+            $query.Count = [int]::MaxValue
             $query.StartDate = $Start
             if ($End) {
                 $query.EndDate = $End
