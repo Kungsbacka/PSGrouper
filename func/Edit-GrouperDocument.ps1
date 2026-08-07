@@ -55,7 +55,7 @@ function Edit-GrouperDocument
                 <ComboBoxItem Content="Static" IsSelected="True" />
                 <ComboBoxItem Content="Personalsystem" />
                 <ComboBoxItem Content="Elevregister" />
-                <ComboBoxItem Content="OnPremAD - Filter" />
+                <ComboBoxItem Content="OnPremAD - Query" />
                 <ComboBoxItem Content="OnPremAD - Group" />
                 <ComboBoxItem Content="AzureAD" />
                 <ComboBoxItem Content="Exo - Group" />

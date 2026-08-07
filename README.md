@@ -9,7 +9,7 @@ The core functionality of Grouper is found [here](https://github.com/Kungsbacka/
 
 ## Dependencies
 
-The module uses parts of the GrouperLib for document handling. Since GrouperLib is currently built for .NET 9, PSGrouper needs PowerShell 7.5
+The module uses parts of the GrouperLib for document handling. Since GrouperLib is currently built for .NET 10, PSGrouper needs PowerShell 7.5
 or later to work.
 
 PSGrouper uses the [Grouper API](https://github.com/Kungsbacka/Grouper/tree/master/GrouperApi) to perform most tasks and this
@@ -82,9 +82,8 @@ roster (elevregister).
   "interval": 30,
   "groupId": "4a31e904-a33a-476e-95da-4d0ec7ab602a",
   "groupName": "Elever i klass 7A på Testskolan",
-  "id": "4afb1b58-0e20-4cb8-832b-9bbfed0b8d02",
   "store": "AzureAd",
-  "owners": "KeepAll",
+  "owner": "KeepExisting",
   "members": [
     {
       "source": "Elevregister",

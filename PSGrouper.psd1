@@ -12,7 +12,7 @@
 RootModule = 'PSGrouper.psm1'
 
 # Version number of this module.
-ModuleVersion = '5.0.4'
+ModuleVersion = '5.0.5'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()

@@ -3,7 +3,7 @@ param (
     [Parameter(Mandatory=$true,Position=0)]
     [string]$GrouperLibPath,
     [ValidateSet('Debug','Release')]
-    [Parameter(Mandatory=$true,Position=1)]
+    [Parameter(Mandatory=$false,Position=1)]
     [string]$BuildType = 'Release',
     [Parameter(Mandatory=$false)]
     [string]$LogFilePath = "$PSScriptRoot\build.log"
@@ -81,9 +81,11 @@ Execute-Step -StepName "Create release folders" -Action {
     New-Item -ItemType Directory -Path "$path\func"
 }
 
-Execute-Step -StepName "Build dependencies" -Action {
-    & dotnet publish $csprojPath --configuration Release --self-contained --output (Join-Path $path 'lib')
-    Remove-Item -Path (Join-Path $path 'lib\CompileTarget*') -Force
+Execute-Step -StepName 'Build & copy library dependencies' -Action {
+    Push-Location "$GrouperLibPath\GrouperLib.Core"
+    dotnet publish -r win-x64 -f net10.0 -c Release
+    Pop-Location
+    Copy-Item -Path "$GrouperLibPath\GrouperLib.Core\bin\Release\net10.0\win-x64\publish\*" -Destination "$path\lib" -Recurse
 }
 
 Execute-Step -StepName "Copy module files" -Action {
@@ -116,4 +118,4 @@ Execute-Step -StepName "Clean up" -Action {
     Remove-Item -Path $path -Recurse -Force
 }
 
-"Build ended at $(Get-Date)" | Out-File -FilePath $LogFilePath -Append
+"Build ended at $(Get-Date)" | Out-File -FilePath $LogFilePath
