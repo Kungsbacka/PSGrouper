@@ -1,0 +1,37 @@
+# PSGrouper line-ending and diff policy
+#
+# Verified before adding: all 32 tracked blobs are already LF-only in storage, so the
+# rules below change nothing that is committed. They make the existing behaviour explicit
+# instead of leaving it to each clone's local core.autocrlf setting -- a clone with
+# autocrlf=false, or on a non-Windows host, would otherwise check out LF and drift from
+# the rest of the tree, which is uniformly CRLF.
+
+# ---------------------------------------------------------------------------
+# Text: stored LF in the repository, checked out CRLF in the working tree.
+# Covers .ps1, .psm1, .psd1, .ps1xml, .md, LICENSE.
+# ---------------------------------------------------------------------------
+* text=auto eol=crlf
+
+# Code signing does not interact with these rules. The source is deliberately unsigned;
+# Build.ps1 signs the copies it stages into release/ (the manifest, the format file and a
+# generated .cat catalog), and release/ is gitignored. So git never handles a signed file,
+# and no path needs to be exempted from the text rule above to keep a signature intact.
+
+# ---------------------------------------------------------------------------
+# Binary: never normalize, never diff as text. ("binary" == "-text -diff".)
+#
+# Nothing binary is tracked -- .gitignore excludes lib/ (the bundled .NET runtime and
+# GrouperLib assemblies) and release/. These rules are insurance for a future
+# `git add -f`, so a stray assembly or signed catalog cannot be corrupted by line-ending
+# conversion on the way in.
+# ---------------------------------------------------------------------------
+*.dll binary
+*.exe binary
+*.pdb binary
+*.cat binary
+
+# ---------------------------------------------------------------------------
+# Diff hunk headers. Git has no built-in driver for PowerShell, so .ps1/.psm1 use the
+# default; only markdown gets one.
+# ---------------------------------------------------------------------------
+*.md text diff=markdown
