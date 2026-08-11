@@ -1,19 +1,24 @@
-﻿<#
+<#
     .SYNOPSIS
         Gets entries from the operational log
 
     .DESCRIPTION
-        Gets entries from the operational log that contains information about
-        which members have been added or removed.
-    .PARAMETER DocumentId
+        Gets entries from the operational log, which records every individual member that Grouper has
+        added to or removed from a group. One entry is written per member and per change, so a single
+        processing run can produce many entries.
+
+        The member the entry is about is called the target.
+
+    .PARAMETER InputObject
         Grouper document entry, Grouper document, [System.Guid] or a string that can
         be converted to a GUID.
 
     .PARAMETER GroupId
-        Returns entries for a particular GroupId.
+        Returns entries for one group, identified by its GUID.
 
     .PARAMETER TargetId
-        Returns entries for a particular TargetId.
+        Returns entries for one member, identified by their GUID. Use this to follow a single person
+        across groups, for example to find out when and why they were removed from one.
 
     .PARAMETER GroupDisplayNameContains
         Part of group display name. Does a wildcard search (*text*)
@@ -32,13 +37,30 @@
         current date and time is used.
 
     .INPUTS
-        (see InputObject)
+        (see DocumentId)
+
+    .OUTPUTS
+        GrouperLib.Core.OperationalLogItem
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Get-GrouperOperationalLog -Newest 10
+        Get-GrouperDocument -GroupName 'MyGroup' | Get-GrouperOperationalLog -Newest 10
 
     .EXAMPLE
         Get-GrouperOperationalLog -Start '2019-01-01' -End '2019-01-31'
+
+    .EXAMPLE
+        Get-GrouperOperationalLog -TargetId '9f0c1c62-4a1e-4b3e-8f4a-2d6b1e5c7a90' -Newest 20
+
+        Shows the twenty most recent group changes affecting one person, across every group.
+
+    .LINK
+        Get-GrouperAuditLog
+
+    .LINK
+        Get-GrouperEventLog
+
+    .LINK
+        Invoke-Grouper
 #>
 function Get-GrouperOperationalLog
 {
@@ -47,11 +69,14 @@ function Get-GrouperOperationalLog
         [Parameter(Mandatory=$false,Position=0,ValueFromPipeline=$true,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,Position=0,ValueFromPipeline=$true,ParameterSetName='Range')]
         [object]
-        $DocumentId,
+        $InputObject,
         [Parameter(Mandatory=$false,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,ParameterSetName='Range')]
         [guid]
         $GroupId,
+        [Parameter(Mandatory=$false,ParameterSetName='Newest')]
+        [Parameter(Mandatory=$false,ParameterSetName='Range')]
+        $TargetId,
         [Parameter(Mandatory=$false,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,ParameterSetName='Range')]
         [string]
@@ -79,12 +104,12 @@ function Get-GrouperOperationalLog
 
     process {
         $query = @{}
-        if ($DocumentId) {
-            $docId = GetDocumentIdFromInputObject $DocumentId
-            if (-not $docId) {
+        if ($InputObject) {
+            $documentId = GetDocumentIdFromInputObject $InputObject
+            if (-not $documentId) {
                 return
             }
-            $query.DocumentId = $docId
+            $query.DocumentId = $documentId
         }
         if ($GroupId) {
             $query.GroupId = $GroupId

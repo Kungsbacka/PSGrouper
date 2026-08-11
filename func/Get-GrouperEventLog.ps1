@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Gets entries from the event log
 
@@ -6,7 +6,7 @@
         Gets entries from the event log. The event log contains errors, warnings
         and information genereated by Invoke-Grouper.
 
-    .PARAMETER DocumentId
+    .PARAMETER InputObject
         Grouper document entry, Grouper document, [System.Guid] or a string that can
         be converted to a GUID.
 
@@ -33,13 +33,25 @@
         current date and time is used.
 
     .INPUTS
-        (see InputObject)
+        (see DocumentId)
+
+    .OUTPUTS
+        GrouperLib.Core.EventLogItem
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Get-GrouperEventLog -Newest 10
+        Get-GrouperDocument -GroupName 'MyGroup' | Get-GrouperEventLog -Newest 10
 
     .EXAMPLE
-        Get-GrouperEventlLog -Start '2019-01-01' -End '2019-01-31' -LogLevel Error
+        Get-GrouperEventLog -Start '2019-01-01' -End '2019-01-31' -LogLevel Error
+
+    .LINK
+        Get-GrouperAuditLog
+
+    .LINK
+        Get-GrouperOperationalLog
+
+    .LINK
+        Invoke-Grouper
 #>
 function Get-GrouperEventLog
 {
@@ -48,7 +60,7 @@ function Get-GrouperEventLog
         [Parameter(Mandatory=$false,Position=0,ValueFromPipeline=$true,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,Position=0,ValueFromPipeline=$true,ParameterSetName='Range')]
         [object]
-        $DocumentId,
+        $InputObject,
         [Parameter(Mandatory=$false,ParameterSetName='Newest')]
         [Parameter(Mandatory=$false,ParameterSetName='Range')]
         [guid]
@@ -82,12 +94,12 @@ function Get-GrouperEventLog
 
     process {
         $query = @{}
-        if ($DocumentId) {
-            $docId = GetDocumentIdFromInputObject $DocumentId
-            if (-not $docId) {
+        if ($InputObject) {
+            $documentId = GetDocumentIdFromInputObject $DocumInputObjectentId
+            if (-not $documentId) {
                 return
             }
-            $query.DocumentId = $docId
+            $query.DocumentId = $documentId
         }
         if ($GroupId) {
             $query.GroupId = $GroupId

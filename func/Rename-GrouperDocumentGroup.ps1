@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Sets a new name for the group in a Grouper document.
 
@@ -16,10 +16,22 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        GrouperLib.Core.GrouperDocument
+
+        A copy of the input document carrying the new group name. Nothing is written to the
+        database until the result is passed to Save-GrouperDocument.
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Rename-GrouperDocumentGroup -NewName 'New Group Name' | Save-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' | Rename-GrouperDocumentGroup -NewName 'New Group Name' | Save-GrouperDocument
 
         Renames MyGroup to New Group Name inside document and saves the updated document to the database.
+
+    .LINK
+        Save-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Rename-GrouperDocumentGroup
 {

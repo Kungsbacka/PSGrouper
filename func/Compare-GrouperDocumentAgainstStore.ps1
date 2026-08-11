@@ -29,6 +29,15 @@
         Get-GrouperDocument -All | Compare-GrouperDocumentAgainstStore
 
         Check all published documents in database
+
+    .LINK
+        Get-GrouperMemberDiff
+
+    .LINK
+        Invoke-Grouper
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Compare-GrouperDocumentAgainstStore
 {

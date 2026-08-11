@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Gets one or more Grouper documents.
 
@@ -9,6 +9,12 @@
 
     .PARAMETER All
         Gets all documents from the database.
+
+    .PARAMETER AllUnpublished
+        Gets every unpublished document, and nothing else.
+
+    .PARAMETER AllDeleted
+        Gets every deleted document, and nothing else.
 
     .PARAMETER DocumentId
         Gets documents by document ID. This should always return one document only.
@@ -38,8 +44,17 @@
     .PARAMETER IncludeDeleted
         Include entries for deleted documents
 
+    .PARAMETER IncludeMetadata
+        Returns each document wrapped in an object that also carries the group ID, group name,
+        revision number, revision date, published and deleted flags, and tags. Cmdlets that take a
+        document accept the wrapper as well, so this can be used anywhere in a pipeline. It is
+        required when you need the tags, because those are not part of the document itself.
+
     .OUTPUTS
-        Grouper documents ([object[]])
+        GrouperLib.Core.GrouperDocument
+
+        With -IncludeMetadata, a PSCustomObject with Document, GroupId, GroupName, Revision,
+        RevisionCreated, IsPublished, IsDeleted and Tags properties instead.
 
     .EXAMPLE
         Get-GrouperDocument -DocumentId 'eea41e99-fa93-4d89-82de-9137cf79fe11'
@@ -49,6 +64,18 @@
 
     .EXAMPLE
         Get-GrouperDocument -RuleName 'Klass' -RuleValue '9B'
+
+    .LINK
+        Get-GrouperMemberDiff
+
+    .LINK
+        Edit-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
+
+    .LINK
+        Invoke-Grouper
 #>
 function Get-GrouperDocument
 {

@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Unpublishes a Grouper document
 
@@ -12,8 +12,20 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        None
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' -Store 'AzureAD' | Unpublish-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' -Store 'AzureAD' | Unpublish-GrouperDocument
+
+    .LINK
+        Publish-GrouperDocument
+
+    .LINK
+        Remove-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Unpublish-GrouperDocument
 {

@@ -19,6 +19,15 @@
 
     .EXAMPLE
         Get-Content .\group.json | Out-String | ConvertTo-GrouperDocument | Get-GrouperMemberDiff
+
+    .LINK
+        Compare-GrouperDocumentAgainstStore
+
+    .LINK
+        Invoke-Grouper
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Get-GrouperMemberDiff
 {

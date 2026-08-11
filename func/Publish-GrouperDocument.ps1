@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Publishes a Grouper document
 
@@ -12,8 +12,20 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        None
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' -Store 'AzureAD' -IncludeUnpublished | Publish-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' -Store 'AzureAD' -IncludeUnpublished | Publish-GrouperDocument
+
+    .LINK
+        Unpublish-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Publish-GrouperDocument
 {

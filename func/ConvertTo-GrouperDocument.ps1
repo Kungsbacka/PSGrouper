@@ -16,6 +16,15 @@
 
     .EXAMPLE
         Get-Content .\MyGroup.json -Encoding UTF8 | ConvertTo-GrouperDocument
+
+    .LINK
+        ConvertFrom-GrouperDocument
+
+    .LINK
+        Test-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
 #>
 function ConvertTo-GrouperDocument
 {

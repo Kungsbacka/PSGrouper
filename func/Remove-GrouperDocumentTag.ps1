@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Removes an existing tag from a Grouper document
 
@@ -16,10 +16,22 @@
     .INPUTS
         (see InputObject)
 
-    .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | % {Remove-GrouperDocumentTag -InputObject $_ -Tag $_.Tags}
+    .OUTPUTS
+        None
 
-        Remove all tags from a document
+    .EXAMPLE
+        Get-GrouperDocument -GroupName 'MyGroup' -IncludeMetadata | ForEach-Object {
+            Remove-GrouperDocumentTag -InputObject $_ -Tag $_.Tags
+        }
+
+        Removes every tag from a document. IncludeMetadata is required, because the tags are part of
+        the metadata object rather than of the document itself.
+
+    .LINK
+        Add-GrouperDocumentTag
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Remove-GrouperDocumentTag
 {

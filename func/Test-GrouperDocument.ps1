@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Tests if a JSON string is a valid Grouper document
 
@@ -20,6 +20,15 @@
 
     .EXAMPLE
         Get-Content .\MyGroup.json -Encoding UTF8 | Test-GrouperDocument -OutputErrors
+
+    .LINK
+        ConvertTo-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
+
+    .LINK
+        Edit-GrouperDocument
 #>
 function Test-GrouperDocument
 {

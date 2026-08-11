@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Allows editing of document JSON
 
@@ -20,7 +20,19 @@
         Grouper document (if 'Next' button is pressed. 'Skip' och 'Cancel' will not produce any output)
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Edit-GrouperDocument | Update-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' | Edit-GrouperDocument | Save-GrouperDocument
+
+    .LINK
+        New-GrouperDocument
+
+    .LINK
+        Test-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Edit-GrouperDocument
 {

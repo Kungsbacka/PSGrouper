@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Saves a Grouper document do the database
 
@@ -16,8 +16,32 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        None
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Edit-GrouperDocument | Save-GrouperDocument -Publish
+        Get-GrouperDocument -GroupName 'MyGroup' | Edit-GrouperDocument | Save-GrouperDocument -Publish
+
+    .LINK
+        Publish-GrouperDocument
+
+    .LINK
+        Test-GrouperDocument
+
+    .LINK
+        Edit-GrouperDocument
+
+    .NOTES
+        Saving always leaves the document unpublished unless you pass -Publish. This is deliberate,
+        so that publishing is a separate decision, but it does mean a saved document is not picked
+        up by the scheduled service until it has been published. The cmdlet prints a warning to
+        remind you. Use Publish-GrouperDocument afterwards, or pass -Publish when saving.
+
+        Each save creates a new revision rather than overwriting the previous one, so an earlier
+        version of a document is never lost.
+
+    .LINK
+        New-GrouperDocument
 #>
 function Save-GrouperDocument
 {

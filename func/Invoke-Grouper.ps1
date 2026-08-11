@@ -13,24 +13,42 @@
         Grouper document or database document entry
 
     .PARAMETER Force
-        Ignores configured change limit
-
-    .PARAMETER PassThru
-        PassThru will make Invoke-Grouper output all generated log items, both event
-        (errors, warnings) and operational (changes to members).
+        Writes the changes even when they fall below the configured change limit. Grouper normally
+        refuses to write when a group would shrink too much, because that usually means a member
+        source returned incomplete data. Look at the change with Get-GrouperMemberDiff first, and
+        use this switch only once you are satisfied that the reduction is correct.
 
     .INPUTS
         (see InputObject)
 
     .OUTPUTS
-        Log items. An OperationalLogItem for each group member change (add/remove), or
-        an ErrorLogItem if an error occurs.
+        GrouperLib.Core.OperationalLogItem
+
+        One item for each member added or removed. A document that results in no changes produces
+        no output. Errors are not returned as objects. They are recorded in the event log, where
+        Get-GrouperEventLog will find them.
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Invoke-Grouper $doc
+        Get-GrouperDocument -GroupName 'MyGroup' | Invoke-Grouper
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -All | Invoke-Grouper
+        Get-GrouperDocument -All | Invoke-Grouper
+
+    .LINK
+        Get-GrouperMemberDiff
+
+    .LINK
+        Get-GrouperOperationalLog
+
+    .LINK
+        Get-GrouperEventLog
+
+    .NOTES
+        A document has to be published before the scheduled service will process it. Invoke-Grouper
+        does not check this, so it will happily process an unpublished document once, by hand.
+
+    .LINK
+        Publish-GrouperDocument
 #>
 function Invoke-Grouper
 {

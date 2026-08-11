@@ -18,7 +18,16 @@
         JSON string
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | ConvertFrom-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' | ConvertFrom-GrouperDocument
+
+    .LINK
+        ConvertTo-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
+
+    .LINK
+        Save-GrouperDocument
 #>
 function ConvertFrom-GrouperDocument
 {

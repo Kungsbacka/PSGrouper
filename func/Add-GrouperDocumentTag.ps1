@@ -1,11 +1,11 @@
-﻿<#
+<#
     .SYNOPSIS
         Adds a new tag to an existing grouper document
 
     .DESCRIPTION
         Adds a new tag to an existing grouper document. The tag gets stored in
         the database and are retrieved as part of the database entry returned
-        by Get-GrouperDocumentEntry. If the same tag is added more than once,
+        by Get-GrouperDocument. If the same tag is added more than once,
         the request will be ignored.
 
     .PARAMETER InputObject
@@ -23,8 +23,17 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        None
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | New-GrouperDocumentTag -Tag 'HR'
+        Get-GrouperDocument -GroupName 'MyGroup' | Add-GrouperDocumentTag -Tag 'HR'
+
+    .LINK
+        Remove-GrouperDocumentTag
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Add-GrouperDocumentTag
 {

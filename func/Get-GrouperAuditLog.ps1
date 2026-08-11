@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Gets entries from the audit log.
 
@@ -27,13 +27,25 @@
         current date and time is used.
 
     .INPUTS
-        (see InputObject)
+        (see DocumentId)
+
+    .OUTPUTS
+        GrouperLib.Core.AuditLogItem
 
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' | Get-GrouperAuditLog -Newest 10
+        Get-GrouperDocument -GroupName 'MyGroup' | Get-GrouperAuditLog -Newest 10
 
     .EXAMPLE
         Get-GrouperAuditLog -Start '2019-01-01' -End '2019-01-31'
+
+    .LINK
+        Get-GrouperEventLog
+
+    .LINK
+        Get-GrouperOperationalLog
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Get-GrouperAuditLog
 {

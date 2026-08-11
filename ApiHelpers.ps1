@@ -1,7 +1,7 @@
 function CheckApi()
 {
     if (-not $Script:ApiUrl) {
-        throw 'Not connected. Call Connect-GrouperApi before calling any other cmdlets.'
+        throw 'Not connected. Call Connect-Grouper before calling any other cmdlets.'
     }
     $true
 }

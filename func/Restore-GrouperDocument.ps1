@@ -1,4 +1,4 @@
-﻿<#
+<#
     .SYNOPSIS
         Restores a Grouper document
 
@@ -12,8 +12,20 @@
     .INPUTS
         (see InputObject)
 
+    .OUTPUTS
+        None
+
     .EXAMPLE
-        Get-GrouperDocumentEntry -GroupName 'MyGroup' -Store 'AzureAD' -IncludeDeleted | Restore-GrouperDocument
+        Get-GrouperDocument -GroupName 'MyGroup' -Store 'AzureAD' -IncludeDeleted | Restore-GrouperDocument
+
+    .LINK
+        Remove-GrouperDocument
+
+    .LINK
+        Publish-GrouperDocument
+
+    .LINK
+        Get-GrouperDocument
 #>
 function Restore-GrouperDocument
 {
