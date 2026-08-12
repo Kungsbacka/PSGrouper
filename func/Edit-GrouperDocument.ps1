@@ -67,11 +67,11 @@ function Edit-GrouperDocument
                 <ComboBoxItem Content="Static" IsSelected="True" />
                 <ComboBoxItem Content="Personalsystem" />
                 <ComboBoxItem Content="Elevregister" />
-                <ComboBoxItem Content="OnPremAD - Query" />
-                <ComboBoxItem Content="OnPremAD - Group" />
-                <ComboBoxItem Content="AzureAD" />
+                <ComboBoxItem Content="OnPremAd - Query" />
+                <ComboBoxItem Content="OnPremAd - Group" />
+                <ComboBoxItem Content="AzureAd - Group" />
                 <ComboBoxItem Content="Exo - Group" />
-                <ComboBoxItem Content="MetaDirectory" />
+                <ComboBoxItem Content="CustomView" />
             </ComboBox>
             <Button x:Name="InsertRule" Content="Insert rule" Margin="5,5,5,5" Padding="3,0,3,0" />
         </StackPanel>
@@ -113,7 +113,7 @@ function Edit-GrouperDocument
         },
         {
           "name": "IncludeManager",
-          "value": true
+          "value": "true"
         }
       ]
     }
@@ -274,9 +274,14 @@ function Edit-GrouperDocument
         })
         $control = $window.FindName('InsertMemberSource')
         $control.Add_Click({
-            $memberSource = $window.FindName('MemberSource');
+            $memberSource = $window.FindName('MemberSource')
             if ($null -ne $memberSource.SelectedValue) {
-                $source = $memberSources[$memberSource.SelectedValue.Content]
+                $sourceName = $memberSource.SelectedValue.Content
+                $source = $memberSources[$sourceName]
+                if ($null -eq $source) {
+                    Write-Host "There is no snippet for member source '$sourceName'." -ForegroundColor Red
+                    return
+                }
                 $content = $window.FindName('JsonContent')
                 $content.Selection.Text = $source
                 $content.Selection.Select($content.Selection.End, $content.Selection.End)
@@ -300,6 +305,7 @@ function Edit-GrouperDocument
         })
         $window.Add_Closing({
             $Script:cancelRequested = $true
+            $Script:windowClosed = $true
         })
 
         function GetContent() {
@@ -325,6 +331,7 @@ function Edit-GrouperDocument
             return $true
         }
         $Script:cancelRequested = $false
+        $Script:windowClosed = $false
         $documentList = New-Object -TypeName 'System.Collections.ArrayList'
     }
 
@@ -354,7 +361,7 @@ function Edit-GrouperDocument
                 break
             }
         }
-        if ($window -and -not $window.Closed) {
+        if ($window -and -not $Script:windowClosed) {
             $window.Close()
         }
     }
