@@ -46,15 +46,24 @@
 
     .PARAMETER IncludeMetadata
         Returns each document wrapped in an object that also carries the group ID, group name,
-        revision number, revision date, published and deleted flags, and tags. Cmdlets that take a
-        document accept the wrapper as well, so this can be used anywhere in a pipeline. It is
-        required when you need the tags, because those are not part of the document itself.
+        revision number, revision date, published and deleted flags, tags, and the result of
+        validating the document against the current rules. Cmdlets that take a document accept the
+        wrapper as well, so this can be used anywhere in a pipeline. It is required when you need
+        the tags, because those are not part of the document itself.
 
     .OUTPUTS
         GrouperLib.Core.GrouperDocument
 
         With -IncludeMetadata, a PSCustomObject with Document, GroupId, GroupName, Revision,
-        RevisionCreated, IsPublished, IsDeleted and Tags properties instead.
+        RevisionCreated, IsPublished, IsDeleted, Tags, IsValid and ValidationErrors properties
+        instead.
+
+    .NOTES
+        Documents are fetched whether or not they still satisfy the current validation rules. The
+        rules change over time, so an older revision may no longer pass them, and refusing to hand
+        it back would make it impossible to fetch and correct. A warning is written for each such
+        document, and with -IncludeMetadata the IsValid and ValidationErrors properties say what is
+        wrong. Saving is unaffected: a document has to validate before it can be written back.
 
     .EXAMPLE
         Get-GrouperDocument -DocumentId 'eea41e99-fa93-4d89-82de-9137cf79fe11'

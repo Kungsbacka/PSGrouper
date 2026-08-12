@@ -26,6 +26,12 @@
 
     .LINK
         Get-GrouperDocument
+
+    .NOTES
+        Publishing is what hands a document to the scheduled service, so a document that no longer
+        satisfies the current validation rules is refused and the errors are reported. The rules
+        change over time, and a document that was valid when it was saved may no longer be valid
+        today. Correct it with Edit-GrouperDocument and save it again before publishing.
 #>
 function Publish-GrouperDocument
 {
