@@ -38,6 +38,28 @@ function GetApiUrl($controller, $fragment)
     }
 }
 
+# The API refuses a document that does not validate with 400 and puts the validation errors in the
+# response body. Left alone, the caller would see nothing but "400 Bad Request" and never learn what
+# was wrong, so the body is lifted into the error message.
+function ThrowApiError($errorRecord)
+{
+    $body = $errorRecord.ErrorDetails.Message
+    if (-not $body) {
+        throw $errorRecord
+    }
+    $parsed = $null
+    try {
+        $parsed = ConvertFrom-Json -InputObject $body
+    }
+    catch {
+        # Not JSON. The body is still the most useful thing available.
+    }
+    if ($parsed.errorMessage) {
+        throw "$($errorRecord.Exception.Message) $($parsed.errorMessage -join ' ')"
+    }
+    throw "$($errorRecord.Exception.Message) $body"
+}
+
 function ApiInvokeWebRequest($url, $method, $body)
 {
     $params = @{
@@ -55,7 +77,12 @@ function ApiInvokeWebRequest($url, $method, $body)
         }
         $params.ContentType = 'application/json; charset=utf-8'
     }
-    $null = Invoke-WebRequest @params
+    try {
+        $null = Invoke-WebRequest @params
+    }
+    catch {
+        ThrowApiError $_
+    }
 }
 
 function ApiGetDocuments($fragment, $params, $includeMeta)
@@ -67,7 +94,14 @@ function ApiGetDocuments($fragment, $params, $includeMeta)
     $entries = Invoke-RestMethod -Uri $url -Method 'Get' -UseDefaultCredentials -UseBasicParsing
     foreach ($entry in $entries) {
         $json = ConvertTo-Json -InputObject $entry.document -Depth 5 -Compress
-        $grouperDocument = [GrouperLib.Core.GrouperDocument]::FromJson($json)
+        # Parsed without validation, so that a revision written under an earlier version of the
+        # rules can still be fetched, edited and saved back. The API has already judged the document
+        # and that verdict is passed on rather than worked out again here.
+        $grouperDocument = [GrouperLib.Core.GrouperDocument]::FromJsonUnvalidated($json)
+        # An older API does not send the verdict at all, and silence there does not mean invalid.
+        if ($null -ne $entry.isValid -and -not $entry.isValid) {
+            Write-Warning -Message "Document $($entry.document.id) does not validate against the current rules. $($entry.validationErrors.errorMessage -join ' ')"
+        }
         if ($includeMeta) {
             [pscustomobject]@{
                 Document = $grouperDocument
@@ -78,6 +112,8 @@ function ApiGetDocuments($fragment, $params, $includeMeta)
                 IsPublished = $entry.isPublished
                 IsDeleted = $entry.isDeleted
                 Tags = $entry.tags
+                IsValid = $entry.isValid
+                ValidationErrors = $entry.validationErrors
             }
         }
         else {
@@ -103,7 +139,12 @@ function ApiPostDocument($url, $doc)
         UseBasicParsing = $true
     }
 
-    Invoke-RestMethod @params
+    try {
+        Invoke-RestMethod @params
+    }
+    catch {
+        ThrowApiError $_
+    }
 }
 
 function ApiGetLogItems($url, $params)
