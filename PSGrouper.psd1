@@ -12,7 +12,7 @@
 RootModule = 'PSGrouper.psm1'
 
 # Version number of this module.
-ModuleVersion = '5.1.0'
+ModuleVersion = '6.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -60,6 +60,7 @@ RequiredModules = @()
 # because they require redirection to load the correct dependencies.
 RequiredAssemblies = @(
     'PresentationFramework'
+    'lib/ICSharpCode.AvalonEdit.dll'
     'lib/GrouperLib.Language.dll'
     'lib/GrouperLib.Core.dll'
     'lib/sv/GrouperLib.Language.resources.dll'

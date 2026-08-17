@@ -57,6 +57,15 @@ function ThrowApiError($errorRecord)
     if ($parsed.errorMessage) {
         throw "$($errorRecord.Exception.Message) $($parsed.errorMessage -join ' ')"
     }
+    # Anything the controllers do not answer themselves arrives as a ProblemDetails object, where the
+    # localized explanation sits in detail. Without these two the whole JSON object would be pasted
+    # into the message and the caller would have to read it out.
+    if ($parsed.detail) {
+        throw "$($errorRecord.Exception.Message) $($parsed.detail)"
+    }
+    if ($parsed.title) {
+        throw "$($errorRecord.Exception.Message) $($parsed.title)"
+    }
     throw "$($errorRecord.Exception.Message) $body"
 }
 
@@ -122,7 +131,10 @@ function ApiGetDocuments($fragment, $params, $includeMeta)
     }
 }
 
-function ApiPostDocument($url, $doc)
+# AllowNotFound turns the API's 404 into no output at all, for a caller whose question is whether the
+# thing is there. Only such a caller asks for it, so a 404 from any other call still surfaces as an
+# error rather than being quietly read as an empty result.
+function ApiPostDocument($url, $doc, [switch]$AllowNotFound)
 {
     if ($doc -is [GrouperLib.Core.GrouperDocument]) {
         $json = $doc.ToJson()
@@ -143,6 +155,9 @@ function ApiPostDocument($url, $doc)
         Invoke-RestMethod @params
     }
     catch {
+        if ($AllowNotFound -and $_.Exception.Response.StatusCode -eq [System.Net.HttpStatusCode]::NotFound) {
+            return
+        }
         ThrowApiError $_
     }
 }

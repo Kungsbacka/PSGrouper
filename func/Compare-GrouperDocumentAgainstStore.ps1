@@ -23,7 +23,10 @@
         (see InputObject)
 
     .OUTPUTS
-        Custom object with information about if the group from the store.
+        Custom object describing what the store said about the group, with NameInDocument,
+        NameInStore, GroupExists and NamesMatch. A group that is no longer in the store comes back
+        with GroupExists set to false and no name. Nothing at all is written when the group is there
+        and the names already match, unless OutputAll is given.
 
     .EXAMPLE
         Get-GrouperDocument -All | Compare-GrouperDocumentAgainstStore
@@ -71,7 +74,11 @@ function Compare-GrouperDocumentAgainstStore
             GroupExists = $true
             NamesMatch = $false
         }
-        $groupInfo = ApiPostDocument (GetApiUrl 'groupinfo') $document
+        # AllowNotFound, because a group that is no longer in the store is the answer this cmdlet
+        # exists to give. The stores raise an exception for a group they cannot find rather than
+        # returning nothing, so without this the API's 404 would be thrown here and GroupExists could
+        # never come back false.
+        $groupInfo = ApiPostDocument (GetApiUrl 'groupinfo') $document -AllowNotFound
         if ($null -eq $groupInfo) {
             $output.GroupExists = $false
             $output

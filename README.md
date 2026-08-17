@@ -15,6 +15,10 @@ or later.
 PSGrouper uses the [Grouper API](https://github.com/Kungsbacka/Grouper/tree/master/GrouperApi) to perform most tasks and this
 must be up and running before PSGrouper can be used.
 
+The editor window in Edit-GrouperDocument uses [AvalonEdit](https://github.com/icsharpcode/AvalonEdit), which is MIT licensed,
+for the JSON editing itself. The dependency is declared in `deps/PSGrouperDeps.csproj` and resolved from NuGet while the module
+is built, so it ends up in the module's lib folder next to GrouperLib and there is nothing to install separately.
+
 ## Build & deploy
 
 Run Build.ps1 to make either a release build or a debug build. A release build builds necessary components of GrouperLib, creates a file catalog,

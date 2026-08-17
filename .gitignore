@@ -3,3 +3,5 @@ depend.cmd
 release/
 lib/
 *.log
+deps/bin/
+deps/obj/
