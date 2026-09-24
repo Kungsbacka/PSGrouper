@@ -12,10 +12,10 @@
 RootModule = 'PSGrouper.psm1'
 
 # Version number of this module.
-ModuleVersion = '6.0.0'
+ModuleVersion = '6.1.0'
 
 # Supported PSEditions
-# CompatiblePSEditions = @()
+CompatiblePSEditions = @('Core')
 
 # ID used to uniquely identify this module
 GUID = '75efac42-50ad-4f63-963b-54b71cdaa98d'
@@ -33,7 +33,7 @@ Copyright = '(c) 2020 Jonas Sjömark All rights reserved.'
 # Description = ''
 
 # Minimum version of the Windows PowerShell engine required by this module
-# PowerShellVersion = ''
+PowerShellVersion = '7.6'
 
 # Name of the Windows PowerShell host required by this module
 # PowerShellHostName = ''

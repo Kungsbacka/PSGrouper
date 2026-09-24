@@ -453,6 +453,7 @@ function Edit-GrouperDocument
             'Klass'
             'LdapFilter'
             'Organisation'
+            'Plats'
             'Roll'
             'SearchBase'
             'Skolform'
